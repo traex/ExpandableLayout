@@ -11,6 +11,6 @@
         android:padding="10dp"
         android:gravity="center"
         android:textColor="@android:color/white"
-        android:background="@android:color/holo_red_light"/>
+        android:background="#c0392b"/>
 
 </RelativeLayout>

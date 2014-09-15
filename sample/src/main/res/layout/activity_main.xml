@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         expandable:headerLayout="@layout/view_header"
         expandable:contentLayout="@layout/view_content"
-        android:background="@android:color/holo_green_dark"/>
+        android:background="#e74c3c"/>
 
     <com.andexert.expandablelayout.library.ExpandableLayout
         android:layout_below="@+id/first"
@@ -23,6 +23,6 @@
         android:layout_height="wrap_content"
         expandable:headerLayout="@layout/view_header"
         expandable:contentLayout="@layout/view_content"
-        android:background="@android:color/holo_green_dark"/>
+        android:background="#e74c3c"/>
 
 </RelativeLayout>
