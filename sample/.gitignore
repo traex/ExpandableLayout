@@ -1,0 +1,36 @@
+#Android generated
+bin
+gen
+
+#Eclipse
+.project
+.classpath
+.settings
+
+#IntelliJ IDEA
+build
+.idea
+*.iml
+*.ipr
+*.iws
+out
+
+#Maven
+target
+release.properties
+pom.xml.*
+project.properties
+gradle.properties
+
+#Ant
+build.xml
+local.properties
+proguard.cfg
+
+#OSX
+.DS_Store
+
+# Crashlytics
+com_crashlytics_export_strings.xml
+crashlytics-build.properties
+crashlytics.properties
