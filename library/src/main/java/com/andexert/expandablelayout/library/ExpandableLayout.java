@@ -33,8 +33,6 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.RelativeLayout;
 
-import butterknife.ButterKnife;
-
 public class ExpandableLayout extends RelativeLayout
 {
     private Boolean isAnimationRunning = false;
@@ -65,7 +63,6 @@ public class ExpandableLayout extends RelativeLayout
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableLayout);
         final int headerID = typedArray.getResourceId(R.styleable.ExpandableLayout_headerLayout, -1);
         final int contentID = typedArray.getResourceId(R.styleable.ExpandableLayout_contentLayout, -1);
-        ButterKnife.inject(rootView);
 
         if (headerID == -1 || contentID == -1)
             throw new IllegalArgumentException("HeaderLayout and ContentLayout cannot be null!");
