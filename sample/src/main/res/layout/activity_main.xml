@@ -17,12 +17,13 @@
         expandable:contentLayout="@layout/view_content"
         android:background="#e74c3c"/>
 
-    <com.andexert.expandablelayout.library.ExpandableLayout
+    <com.andexert.expandablelayout.library.ExpandableLayoutListView
+        android:id="@+id/listview"
         android:layout_below="@+id/first"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_height="match_parent"
         expandable:headerLayout="@layout/view_header"
-        expandable:contentLayout="@layout/view_content"
-        android:background="#e74c3c"/>
+        expandable:contentLayout="@layout/view_content"/>
 
 </RelativeLayout>

@@ -4,13 +4,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <TextView
+    <EditText
+        android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="ExpandableLayout content!"
-        android:padding="10dp"
         android:gravity="center"
+        android:hint="Hello World !"
         android:textColor="@android:color/white"
         android:background="#c0392b"/>
+
+    <Button
+        android:layout_below="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="click ME !"/>
 
 </RelativeLayout>

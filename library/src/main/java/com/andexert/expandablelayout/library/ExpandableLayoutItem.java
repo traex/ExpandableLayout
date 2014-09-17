@@ -27,13 +27,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.RelativeLayout;
 
-public class ExpandableLayout extends RelativeLayout
+public class ExpandableLayoutItem extends RelativeLayout
 {
     private Boolean isAnimationRunning = false;
     private Boolean isOpened = false;
@@ -41,18 +42,18 @@ public class ExpandableLayout extends RelativeLayout
     private RelativeLayout contentRelativeLayout;
     private RelativeLayout headerRelativeLayout;
 
-    public ExpandableLayout(Context context)
+    public ExpandableLayoutItem(Context context)
     {
         super(context);
     }
 
-    public ExpandableLayout(Context context, AttributeSet attrs)
+    public ExpandableLayoutItem(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public ExpandableLayout(Context context, AttributeSet attrs, int defStyle)
+    public ExpandableLayoutItem(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
         init(context, attrs);
@@ -74,32 +75,21 @@ public class ExpandableLayout extends RelativeLayout
         final View headerView = View.inflate(context, headerID, null);
         headerView.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         headerRelativeLayout.addView(headerView);
+        setTag(ExpandableLayoutItem.class.getName());
         final View contentView = View.inflate(context, contentID, null);
         contentView.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         contentRelativeLayout.addView(contentView);
         contentRelativeLayout.setVisibility(GONE);
-        headerRelativeLayout.setOnClickListener(new OnClickListener()
+
+
+        headerRelativeLayout.setOnTouchListener(new OnTouchListener()
         {
             @Override
-            public void onClick(View v)
+            public boolean onTouch(View v, MotionEvent event)
             {
-                if (!isAnimationRunning)
-                {
-                    if (contentRelativeLayout.getVisibility() == VISIBLE)
-                        collapse(contentRelativeLayout);
-                    else
-                        expand(contentRelativeLayout);
-
-                    isAnimationRunning = true;
-                    new Handler().postDelayed(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            isAnimationRunning = false;
-                        }
-                    }, duration);
-                }
+                if (isOpened())
+                    hide();
+                return false;
             }
         });
     }

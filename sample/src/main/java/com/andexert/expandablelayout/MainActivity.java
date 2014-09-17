@@ -4,19 +4,24 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
-import com.andexert.expandablelayout.library.ExpandableLayout;
+import com.andexert.expandablelayout.library.ExpandableLayoutListView;
 
 
 public class MainActivity extends Activity {
+
+    private final String[] array = {"Hello", "World", "Android", "is", "Awesome"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ExpandableLayout expandableLayout = (ExpandableLayout) findViewById(R.id.first);
-        expandableLayout.show();
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.view_row, R.id.header_text, array);
+        final ExpandableLayoutListView expandableLayoutListView = (ExpandableLayoutListView) findViewById(R.id.listview);
+
+        expandableLayoutListView.setAdapter(arrayAdapter);
     }
 
 
