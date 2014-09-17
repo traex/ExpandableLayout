@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.andexert.expandablelayout.library.ExpandableLayout;
+
 
 public class MainActivity extends Activity {
 
@@ -12,6 +14,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ExpandableLayout expandableLayout = (ExpandableLayout) findViewById(R.id.first);
+        expandableLayout.show();
     }
 
 

@@ -36,7 +36,9 @@ import android.widget.RelativeLayout;
 public class ExpandableLayout extends RelativeLayout
 {
     private Boolean isAnimationRunning = false;
+    private Boolean isOpened = false;
     private Integer duration;
+    private RelativeLayout contentRelativeLayout;
 
     public ExpandableLayout(Context context)
     {
@@ -59,10 +61,10 @@ public class ExpandableLayout extends RelativeLayout
     {
         final View rootView = View.inflate(context, R.layout.view_expandable, this);
         final RelativeLayout headerRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.view_expandable_headerlayout);
-        final RelativeLayout contentRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.view_expandable_contentLayout);
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableLayout);
         final int headerID = typedArray.getResourceId(R.styleable.ExpandableLayout_headerLayout, -1);
         final int contentID = typedArray.getResourceId(R.styleable.ExpandableLayout_contentLayout, -1);
+        contentRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.view_expandable_contentLayout);
 
         if (headerID == -1 || contentID == -1)
             throw new IllegalArgumentException("HeaderLayout and ContentLayout cannot be null!");
@@ -109,14 +111,18 @@ public class ExpandableLayout extends RelativeLayout
         final int targetHeight = v.getMeasuredHeight();
         v.getLayoutParams().height = 0;
         v.setVisibility(VISIBLE);
+
         Animation animation = new Animation()
         {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t)
             {
+                if (interpolatedTime == 1)
+                    isOpened = true;
                 v.getLayoutParams().height = (interpolatedTime == 1) ? LayoutParams.WRAP_CONTENT : (int) (targetHeight * interpolatedTime);
                 v.requestLayout();
             }
+
 
             @Override
             public boolean willChangeBounds() {
@@ -134,9 +140,12 @@ public class ExpandableLayout extends RelativeLayout
         {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t) {
-                if(interpolatedTime == 1){
+                if(interpolatedTime == 1)
+                {
                     v.setVisibility(View.GONE);
-                }else{
+                    isOpened = false;
+                }
+                else{
                     v.getLayoutParams().height = initialHeight - (int)(initialHeight * interpolatedTime);
                     v.requestLayout();
                 }
@@ -150,5 +159,44 @@ public class ExpandableLayout extends RelativeLayout
 
         animation.setDuration(duration);
         v.startAnimation(animation);
+    }
+
+    public Boolean isOpened()
+    {
+        return isOpened;
+    }
+
+    public void show()
+    {
+        if (!isAnimationRunning)
+        {
+            expand(contentRelativeLayout);
+            isAnimationRunning = true;
+            new Handler().postDelayed(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    isAnimationRunning = false;
+                }
+            }, duration);
+        }
+    }
+
+    public void hide()
+    {
+        if (!isAnimationRunning)
+        {
+            collapse(contentRelativeLayout);
+            isAnimationRunning = true;
+            new Handler().postDelayed(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    isAnimationRunning = false;
+                }
+            }, duration);
+        }
     }
 }
