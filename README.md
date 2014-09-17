@@ -36,9 +36,9 @@ Declare an ExpandableLayout inside your XML layout file. You also need to other 
          
 ```
 
-### ExpandableLayoutItem && ExpandableLayoutItem
+#### ExpandableLayoutItem && ExpandableLayoutItem
 
-You can use ExapandableLayout in an `ExpandableLayoutItem` with `ExpandableLayoutItem` as row :
+You can use ExapandableLayout in an `ExpandableLayoutListView` with `ExpandableLayoutItem` as row :
 
 ExpandableLayoutItem
 ``` xml
@@ -71,6 +71,10 @@ You can call dynamically `open`, `close` and `isOpened` from an ExpandableLayout
 You can change duration of the animation:
 
 * app:duration [integer def:200] --> Duration of the animation
+
+### Troubleshooting
+
+If you want to use the `ExpandableLayoutListView` with EditText, you have to set `android:windowSoftInputMode="adjustPan" to prevent the ListView to redraw itself and close the ExpandableLayoutItem.
 
 ### Acknowledgements
 
