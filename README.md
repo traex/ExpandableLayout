@@ -74,7 +74,7 @@ You can change duration of the animation:
 
 ### Troubleshooting
 
-If you want to use the `ExpandableLayoutListView` with EditText, you have to set `android:windowSoftInputMode="adjustPan" to prevent the ListView to redraw itself and close the ExpandableLayoutItem.
+If you want to use the `ExpandableLayoutListView` with EditText, you have to set `android:windowSoftInputMode="adjustPan"` to prevent the ListView to redraw itself and close the ExpandableLayoutItem.
 
 ### Acknowledgements
 
