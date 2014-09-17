@@ -13,12 +13,14 @@ The lib is available on Maven Central, you can find it with [Gradle, please](htt
 ``` xml
 
 dependencies {
-    compile 'com.github.traex.expandablelayout:library:1.1'
+    compile 'com.github.traex.expandablelayout:library:1.2'
 }
 
 ``` 
 
 ### Usage
+
+#### ExpandableLayout
 
 Declare an ExpandableLayout inside your XML layout file. You also need to other layouts for header and content:
 
@@ -31,6 +33,34 @@ Declare an ExpandableLayout inside your XML layout file. You also need to other 
          android:layout_height="match_parent"
          expandable:headerLayout="@layout/view_header"
          expandable:contentLayout="@layout/view_content"/>
+         
+```
+
+### ExpandableLayoutItem && ExpandableLayoutItem
+
+You can use ExapandableLayout in an `ExpandableLayoutItem` with `ExpandableLayoutItem` as row :
+
+ExpandableLayoutItem
+``` xml
+
+  <com.andexert.expandablelayout.library.ExpandableLayoutItem
+         android:id="@+id/expandableLayout"
+         xmlns:expandable="http://schemas.android.com/apk/res-auto"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         expandable:headerLayout="@layout/view_header"
+         expandable:contentLayout="@layout/view_content"/>
+         
+```
+
+ExpandableLayoutListView
+``` xml
+
+  <com.andexert.expandablelayout.library.ExpandableLayoutListView
+         android:id="@+id/expandableLayout"
+         xmlns:expandable="http://schemas.android.com/apk/res-auto"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"/>
          
 ```
 
