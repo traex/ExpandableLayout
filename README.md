@@ -13,7 +13,7 @@ The lib is available on Maven Central, you can find it with [Gradle, please](htt
 ``` xml
 
 dependencies {
-    compile 'com.github.traex.expandablelayout:library:1.0'
+    compile 'com.github.traex.expandablelayout:library:1.1'
 }
 
 ``` 
@@ -33,6 +33,8 @@ Declare an ExpandableLayout inside your XML layout file. You also need to other 
          expandable:contentLayout="@layout/view_content"/>
          
 ```
+
+You can call dynamically `open`, `close` and `isOpened` from an ExpandableLayout object.
 
 ### Customization
 
