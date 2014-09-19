@@ -11,7 +11,7 @@ import com.andexert.expandablelayout.library.ExpandableLayoutListView;
 
 public class MainActivity extends Activity {
 
-    private final String[] array = {"Hello", "World", "Android", "is", "Awesome"};
+    private final String[] array = {"Hello", "World", "Android", "is", "Awesome", "World", "Android", "is", "Awesome", "World", "Android", "is", "Awesome", "World", "Android", "is", "Awesome"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

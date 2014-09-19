@@ -25,11 +25,15 @@ package com.andexert.expandablelayout.library;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.RelativeLayout;
@@ -41,6 +45,7 @@ public class ExpandableLayoutItem extends RelativeLayout
     private Integer duration;
     private RelativeLayout contentRelativeLayout;
     private RelativeLayout headerRelativeLayout;
+    private Boolean closeByUser = true;
 
     public ExpandableLayoutItem(Context context)
     {
@@ -81,21 +86,26 @@ public class ExpandableLayoutItem extends RelativeLayout
         contentRelativeLayout.addView(contentView);
         contentRelativeLayout.setVisibility(GONE);
 
-
         headerRelativeLayout.setOnTouchListener(new OnTouchListener()
         {
             @Override
             public boolean onTouch(View v, MotionEvent event)
             {
-                if (isOpened())
+                if (isOpened() && event.getAction() == MotionEvent.ACTION_UP)
+                {
                     hide();
-                return false;
+                    closeByUser = true;
+                }
+
+                return isOpened() && event.getAction() == MotionEvent.ACTION_DOWN;
             }
         });
+
     }
 
     private void expand(final View v)
     {
+        isOpened = true;
         v.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         final int targetHeight = v.getMeasuredHeight();
         v.getLayoutParams().height = 0;
@@ -106,8 +116,6 @@ public class ExpandableLayoutItem extends RelativeLayout
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t)
             {
-                if (interpolatedTime == 1)
-                    isOpened = true;
                 v.getLayoutParams().height = (interpolatedTime == 1) ? LayoutParams.WRAP_CONTENT : (int) (targetHeight * interpolatedTime);
                 v.requestLayout();
             }
@@ -124,6 +132,7 @@ public class ExpandableLayoutItem extends RelativeLayout
 
     private void collapse(final View v)
     {
+        isOpened = false;
         final int initialHeight = v.getMeasuredHeight();
         Animation animation = new Animation()
         {
@@ -148,6 +157,25 @@ public class ExpandableLayoutItem extends RelativeLayout
 
         animation.setDuration(duration);
         v.startAnimation(animation);
+    }
+
+    public void hideNow()
+    {
+        contentRelativeLayout.getLayoutParams().height = 0;
+        contentRelativeLayout.invalidate();
+        contentRelativeLayout.setVisibility(View.GONE);
+        isOpened = false;
+    }
+
+    public void showNow()
+    {
+        if (!this.isOpened())
+        {
+            contentRelativeLayout.setVisibility(VISIBLE);
+            this.isOpened = true;
+            contentRelativeLayout.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
+            contentRelativeLayout.invalidate();
+        }
     }
 
     public Boolean isOpened()
@@ -197,5 +225,11 @@ public class ExpandableLayoutItem extends RelativeLayout
                 }
             }, duration);
         }
+        closeByUser = false;
+    }
+
+    public Boolean getCloseByUser()
+    {
+        return closeByUser;
     }
 }
