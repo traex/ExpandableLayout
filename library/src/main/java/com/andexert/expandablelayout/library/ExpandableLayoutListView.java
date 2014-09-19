@@ -43,19 +43,19 @@ public class ExpandableLayoutListView extends ListView
     public ExpandableLayoutListView(Context context)
     {
         super(context);
-        setOnScrollListener(new OnExpandableLayoutScoolListener());
+        setOnScrollListener(new OnExpandableLayoutScrollListener());
     }
 
     public ExpandableLayoutListView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        setOnScrollListener(new OnExpandableLayoutScoolListener());
+        setOnScrollListener(new OnExpandableLayoutScrollListener());
     }
 
     public ExpandableLayoutListView(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
-        setOnScrollListener(new OnExpandableLayoutScoolListener());
+        setOnScrollListener(new OnExpandableLayoutScrollListener());
     }
 
     @Override
@@ -83,7 +83,16 @@ public class ExpandableLayoutListView extends ListView
         return super.performItemClick(view, position, id);
     }
 
-    public class OnExpandableLayoutScoolListener implements OnScrollListener
+    @Override
+    public void setOnScrollListener(OnScrollListener l)
+    {
+        if (!(l instanceof OnExpandableLayoutScrollListener))
+            throw new IllegalArgumentException("OnScrollListner must be an OnExpandableLayoutScrollListener");
+
+        super.setOnScrollListener(l);
+    }
+
+    public class OnExpandableLayoutScrollListener implements OnScrollListener
     {
         private int scrollState = 0;
 
