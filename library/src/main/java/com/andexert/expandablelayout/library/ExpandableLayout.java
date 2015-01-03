@@ -40,6 +40,7 @@ public class ExpandableLayout extends RelativeLayout
     private Integer duration;
     private RelativeLayout contentRelativeLayout;
     private RelativeLayout headerRelativeLayout;
+    private Animation animation;
 
     public ExpandableLayout(Context context)
     {
@@ -111,7 +112,7 @@ public class ExpandableLayout extends RelativeLayout
         v.getLayoutParams().height = 0;
         v.setVisibility(VISIBLE);
 
-        Animation animation = new Animation()
+        animation = new Animation()
         {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t)
@@ -135,7 +136,7 @@ public class ExpandableLayout extends RelativeLayout
     private void collapse(final View v)
     {
         final int initialHeight = v.getMeasuredHeight();
-        Animation animation = new Animation()
+        animation = new Animation()
         {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t) {
@@ -207,5 +208,10 @@ public class ExpandableLayout extends RelativeLayout
                 }
             }, duration);
         }
+    }
+
+    @Override
+    public void setLayoutAnimationListener(Animation.AnimationListener animationListener) {
+        animation.setAnimationListener(animationListener);
     }
 }
