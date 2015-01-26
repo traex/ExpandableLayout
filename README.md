@@ -13,7 +13,7 @@ The lib is available on Maven Central, you can find it with [Gradle, please](htt
 ``` xml
 
 dependencies {
-    compile 'com.github.traex.expandablelayout:library:1.2'
+    compile 'com.github.traex.expandablelayout:library:1.2.2'
 }
 
 ``` 
@@ -63,6 +63,7 @@ ExpandableLayoutListView
          android:layout_height="match_parent"/>
          
 ```
+If you want to manage the OnScroll, you have to use `OnExpandableLayoutScrollListener` and don't forget to call super in each method.
 
 You can call dynamically `open`, `close` and `isOpened` from an ExpandableLayout object.
 
