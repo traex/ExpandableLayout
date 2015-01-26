@@ -25,17 +25,14 @@ package com.andexert.expandablelayout.library;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 public class ExpandableLayoutItem extends RelativeLayout
@@ -43,8 +40,8 @@ public class ExpandableLayoutItem extends RelativeLayout
     private Boolean isAnimationRunning = false;
     private Boolean isOpened = false;
     private Integer duration;
-    private RelativeLayout contentRelativeLayout;
-    private RelativeLayout headerRelativeLayout;
+    private FrameLayout contentLayout;
+    private FrameLayout headerLayout;
     private Boolean closeByUser = true;
 
     public ExpandableLayoutItem(Context context)
@@ -67,26 +64,29 @@ public class ExpandableLayoutItem extends RelativeLayout
     private void init(final Context context, AttributeSet attrs)
     {
         final View rootView = View.inflate(context, R.layout.view_expandable, this);
-        headerRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.view_expandable_headerlayout);
+        headerLayout = (FrameLayout) rootView.findViewById(R.id.view_expandable_headerlayout);
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableLayout);
-        final int headerID = typedArray.getResourceId(R.styleable.ExpandableLayout_headerLayout, -1);
-        final int contentID = typedArray.getResourceId(R.styleable.ExpandableLayout_contentLayout, -1);
-        contentRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.view_expandable_contentLayout);
+        final int headerID = typedArray.getResourceId(R.styleable.ExpandableLayout_el_headerLayout, -1);
+        final int contentID = typedArray.getResourceId(R.styleable.ExpandableLayout_el_contentLayout, -1);
+        contentLayout = (FrameLayout) rootView.findViewById(R.id.view_expandable_contentLayout);
 
         if (headerID == -1 || contentID == -1)
             throw new IllegalArgumentException("HeaderLayout and ContentLayout cannot be null!");
 
-        duration = typedArray.getInt(R.styleable.ExpandableLayout_duration, getContext().getResources().getInteger(android.R.integer.config_shortAnimTime));
+        if (isInEditMode())
+            return;
+
+        duration = typedArray.getInt(R.styleable.ExpandableLayout_el_duration, getContext().getResources().getInteger(android.R.integer.config_shortAnimTime));
         final View headerView = View.inflate(context, headerID, null);
         headerView.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-        headerRelativeLayout.addView(headerView);
+        headerLayout.addView(headerView);
         setTag(ExpandableLayoutItem.class.getName());
         final View contentView = View.inflate(context, contentID, null);
         contentView.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        contentRelativeLayout.addView(contentView);
-        contentRelativeLayout.setVisibility(GONE);
+        contentLayout.addView(contentView);
+        contentLayout.setVisibility(GONE);
 
-        headerRelativeLayout.setOnTouchListener(new OnTouchListener()
+        headerLayout.setOnTouchListener(new OnTouchListener()
         {
             @Override
             public boolean onTouch(View v, MotionEvent event)
@@ -161,9 +161,9 @@ public class ExpandableLayoutItem extends RelativeLayout
 
     public void hideNow()
     {
-        contentRelativeLayout.getLayoutParams().height = 0;
-        contentRelativeLayout.invalidate();
-        contentRelativeLayout.setVisibility(View.GONE);
+        contentLayout.getLayoutParams().height = 0;
+        contentLayout.invalidate();
+        contentLayout.setVisibility(View.GONE);
         isOpened = false;
     }
 
@@ -171,10 +171,10 @@ public class ExpandableLayoutItem extends RelativeLayout
     {
         if (!this.isOpened())
         {
-            contentRelativeLayout.setVisibility(VISIBLE);
+            contentLayout.setVisibility(VISIBLE);
             this.isOpened = true;
-            contentRelativeLayout.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
-            contentRelativeLayout.invalidate();
+            contentLayout.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
+            contentLayout.invalidate();
         }
     }
 
@@ -187,7 +187,7 @@ public class ExpandableLayoutItem extends RelativeLayout
     {
         if (!isAnimationRunning)
         {
-            expand(contentRelativeLayout);
+            expand(contentLayout);
             isAnimationRunning = true;
             new Handler().postDelayed(new Runnable()
             {
@@ -200,21 +200,21 @@ public class ExpandableLayoutItem extends RelativeLayout
         }
     }
 
-    public RelativeLayout getHeaderRelativeLayout()
+    public FrameLayout getHeaderLayout()
     {
-        return headerRelativeLayout;
+        return headerLayout;
     }
 
-    public RelativeLayout getContentRelativeLayout()
+    public FrameLayout getContentLayout()
     {
-        return contentRelativeLayout;
+        return contentLayout;
     }
 
     public void hide()
     {
         if (!isAnimationRunning)
         {
-            collapse(contentRelativeLayout);
+            collapse(contentLayout);
             isAnimationRunning = true;
             new Handler().postDelayed(new Runnable()
             {
