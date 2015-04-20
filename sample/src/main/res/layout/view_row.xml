@@ -10,8 +10,8 @@
         android:id="@+id/row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        expandable:headerLayout="@layout/view_header"
-        expandable:contentLayout="@layout/view_content"
+        expandable:el_headerLayout="@layout/view_header"
+        expandable:el_contentLayout="@layout/view_content"
         android:background="#e74c3c"/>
 
 </RelativeLayout>

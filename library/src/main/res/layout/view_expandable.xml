@@ -3,18 +3,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/view_expandable_headerlayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"/>
 
-    </RelativeLayout>
-
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/view_expandable_contentLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view_expandable_headerlayout">
-    </RelativeLayout>
+        android:layout_below="@+id/view_expandable_headerlayout"/>
 
 </RelativeLayout>
