@@ -82,7 +82,11 @@ public class ExpandableLayout extends RelativeLayout
         final View contentView = View.inflate(context, contentID, null);
         contentView.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         contentLayout.addView(contentView);
-        contentLayout.setVisibility(GONE);
+        //workaround for android pre 14sdk
+        contentLayout.getLayoutParams().height = 1;
+        contentLayout.setVisibility(View.INVISIBLE);
+        contentLayout.requestLayout();
+
         headerLayout.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -148,7 +152,7 @@ public class ExpandableLayout extends RelativeLayout
             protected void applyTransformation(float interpolatedTime, Transformation t) {
                 if(interpolatedTime == 1)
                 {
-                    v.setVisibility(View.GONE);
+                    v.setVisibility(View.INVISIBLE);
                     isOpened = false;
                 }
                 else{
