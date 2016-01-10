@@ -176,6 +176,9 @@ public class ExpandableLayout extends RelativeLayout
     {
         if (!isAnimationRunning)
         {
+            if(onStartShowingListener !=null)
+                onStartShowingListener.onStartShowing(this);
+
             expand(contentLayout);
             isAnimationRunning = true;
             new Handler().postDelayed(new Runnable()
@@ -184,6 +187,10 @@ public class ExpandableLayout extends RelativeLayout
                 public void run()
                 {
                     isAnimationRunning = false;
+
+                    if(onFinishShowingListener !=null)
+                        onFinishShowingListener.onFinishShowing(ExpandableLayout.this);
+
                 }
             }, duration);
         }
@@ -203,6 +210,8 @@ public class ExpandableLayout extends RelativeLayout
     {
         if (!isAnimationRunning)
         {
+            if(onStartHidingListener !=null)
+                onStartHidingListener.onHidingowing(this);
             collapse(contentLayout);
             isAnimationRunning = true;
             new Handler().postDelayed(new Runnable()
@@ -211,6 +220,10 @@ public class ExpandableLayout extends RelativeLayout
                 public void run()
                 {
                     isAnimationRunning = false;
+
+                    if(onFinishHidingListener !=null)
+                        onFinishHidingListener.onFinishHiding(ExpandableLayout.this);
+
                 }
             }, duration);
         }
@@ -220,4 +233,49 @@ public class ExpandableLayout extends RelativeLayout
     public void setLayoutAnimationListener(Animation.AnimationListener animationListener) {
         animation.setAnimationListener(animationListener);
     }
+
+    public interface OnStartShowingListener{
+        public void onStartShowing(ExpandableLayout layout);
+    }
+
+    private OnStartShowingListener onStartShowingListener;
+
+    public void setOnStartShowingListener(OnStartShowingListener onStartShowingListener) {
+        this.onStartShowingListener = onStartShowingListener;
+    }
+
+    public interface OnFinishShowingListener{
+        public void onFinishShowing(ExpandableLayout layout);
+    }
+
+    private OnFinishShowingListener onFinishShowingListener;
+
+    public void setOnFinishartShowingListener(OnFinishShowingListener onFinishShowingListener) {
+        this.onFinishShowingListener = onFinishShowingListener;
+    }
+
+    //
+
+    public interface OnStartHidingListener{
+        public void onHidingowing(ExpandableLayout layout);
+    }
+
+    private OnStartHidingListener onStartHidingListener;
+
+    public void setOnStartHidingListener(OnStartHidingListener onStartHidingListener) {
+        this.onStartHidingListener = onStartHidingListener;
+    }
+
+    public interface OnFinishHidingListener{
+        public void onFinishHiding(ExpandableLayout layout);
+    }
+
+    private OnFinishHidingListener onFinishHidingListener;
+
+    public void setOnFinishartHidingListener(OnFinishHidingListener onFinishHidingListener) {
+        this.onFinishHidingListener = onFinishHidingListener;
+    }
+
+
+
 }
