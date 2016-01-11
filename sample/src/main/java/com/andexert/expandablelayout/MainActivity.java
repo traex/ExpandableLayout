@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
+import com.andexert.expandablelayout.library.ExpandableLayout;
 import com.andexert.expandablelayout.library.ExpandableLayoutListView;
 
 
@@ -20,6 +22,35 @@ public class MainActivity extends Activity {
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.view_row, R.id.header_text, array);
         final ExpandableLayoutListView expandableLayoutListView = (ExpandableLayoutListView) findViewById(R.id.listview);
+        final ExpandableLayout expandableLayout;
+
+//        expandableLayout.setOnStartHidingListener(new ExpandableLayout.OnStartHidingListener() {
+//            @Override
+//            public void onHidingowing(ExpandableLayout layout) {
+//
+//            }
+//        });
+//
+//        expandableLayout.setOnStartShowingListener(new ExpandableLayout.OnStartShowingListener() {
+//            @Override
+//            public void onStartShowing(ExpandableLayout layout) {
+//
+//            }
+//        });
+//
+//        expandableLayout.setOnFinishHidingListener(new ExpandableLayout.OnFinishHidingListener() {
+//            @Override
+//            public void onFinishHiding(ExpandableLayout layout) {
+//
+//            }
+//        });
+//
+//        expandableLayout.setOnFinishShowingListener(new ExpandableLayout.OnFinishShowingListener() {
+//            @Override
+//            public void onFinishShowing(ExpandableLayout layout) {
+//
+//            }
+//        });
 
         expandableLayoutListView.setAdapter(arrayAdapter);
     }
