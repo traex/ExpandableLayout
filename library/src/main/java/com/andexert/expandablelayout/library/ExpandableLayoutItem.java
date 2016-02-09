@@ -101,6 +101,7 @@ public class ExpandableLayoutItem extends RelativeLayout
             }
         });
 
+        typedArray.recycle();
     }
 
     private void expand(final View v)
