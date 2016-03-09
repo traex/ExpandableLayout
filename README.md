@@ -13,7 +13,7 @@ The lib is available on Maven Central, you can find it with [Gradle, please](htt
 ``` xml
 
 dependencies {
-    compile 'com.github.traex.expandablelayout:library:1.2.2'
+    compile 'com.github.traex.expandablelayout:library:1.3'
 }
 
 ``` 
@@ -31,8 +31,8 @@ Declare an ExpandableLayout inside your XML layout file. You also need to other 
          xmlns:expandable="http://schemas.android.com/apk/res-auto"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
-         expandable:headerLayout="@layout/view_header"
-         expandable:contentLayout="@layout/view_content"/>
+         expandable:el_headerLayout="@layout/view_header"
+         expandable:el_contentLayout="@layout/view_content"/>
          
 ```
 
@@ -48,8 +48,8 @@ ExpandableLayoutItem
          xmlns:expandable="http://schemas.android.com/apk/res-auto"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
-         expandable:headerLayout="@layout/view_header"
-         expandable:contentLayout="@layout/view_content"/>
+         expandable:el_headerLayout="@layout/view_header"
+         expandable:el_contentLayout="@layout/view_content"/>
          
 ```
 
