@@ -13,7 +13,7 @@ The lib is available on Maven Central, you can find it with [Gradle, please](htt
 ``` xml
 
 dependencies {
-    compile 'com.github.traex.expandablelayout:library:1.2.2'
+    compile 'com.github.traex.expandablelayout:library:1.3'
 }
 
 ``` 
@@ -27,12 +27,12 @@ Declare an ExpandableLayout inside your XML layout file. You also need to other 
 ``` xml
 
   <com.andexert.expandablelayout.library.ExpandableLayout
+         xmlns:app="http://schemas.android.com/apk/res-auto"
          android:id="@+id/expandableLayout"
-         xmlns:expandable="http://schemas.android.com/apk/res-auto"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
-         expandable:headerLayout="@layout/view_header"
-         expandable:contentLayout="@layout/view_content"/>
+         app:el_headerLayout="@layout/view_header"
+         app:el_contentLayout="@layout/view_content"/>
          
 ```
 
@@ -44,12 +44,12 @@ ExpandableLayoutItem
 ``` xml
 
   <com.andexert.expandablelayout.library.ExpandableLayoutItem
+         xmlns:app="http://schemas.android.com/apk/res-auto"
          android:id="@+id/expandableLayout"
-         xmlns:expandable="http://schemas.android.com/apk/res-auto"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
-         expandable:headerLayout="@layout/view_header"
-         expandable:contentLayout="@layout/view_content"/>
+         app:el_headerLayout="@layout/view_header"
+         app:el_contentLayout="@layout/view_content"/>
          
 ```
 
@@ -57,8 +57,8 @@ ExpandableLayoutListView
 ``` xml
 
   <com.andexert.expandablelayout.library.ExpandableLayoutListView
+         xmlns:app="http://schemas.android.com/apk/res-auto"
          android:id="@+id/expandableLayout"
-         xmlns:expandable="http://schemas.android.com/apk/res-auto"
          android:layout_width="match_parent"
          android:layout_height="match_parent"/>
          
@@ -71,7 +71,7 @@ You can call dynamically `open`, `close` and `isOpened` from an ExpandableLayout
 
 You can change duration of the animation:
 
-* app:duration [integer def:200] --> Duration of the animation
+* app:el_duration [integer def:200] --> Duration of the animation
 
 ### Troubleshooting
 
