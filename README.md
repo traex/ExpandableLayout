@@ -13,7 +13,7 @@ The lib is available on Maven Central, you can find it with [Gradle, please](htt
 ``` xml
 
 dependencies {
-    compile 'com.github.traex.expandablelayout:library:1.2.2'
+    implementation 'com.github.traex.expandablelayout:library:1.2.2'
 }
 
 ``` 
