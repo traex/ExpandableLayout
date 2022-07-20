@@ -3,7 +3,7 @@ ExpandableLayout
 
 ![ExpandableLayout](https://github.com/traex/ExpandableLayout/blob/master/header.png)
 
-ExpandableLayout provides an easy way to create a view called header with an expandable view. Both view are external layout to allow a maximum of customization. [You can find a sample](https://github.com/traex/ExpandableLayout/blob/master/sample/) that how to use an ExpandableLayout to your layout.
+ExpandableLayout provides an easy way to create a view called header with an expandable view. Both views have an external layout to allow maximum customization. [You can find a sample](https://github.com/traex/ExpandableLayout/blob/master/sample/) that how to use an ExpandableLayout to your layout.
 
 ![ExpandableLayout GIF](https://github.com/traex/ExpandableLayout/blob/master/demo.gif)
  
@@ -22,7 +22,7 @@ dependencies {
 
 #### ExpandableLayout
 
-Declare an ExpandableLayout inside your XML layout file. You also need to other layouts for header and content:
+Declare an ExpandableLayout inside your XML layout file. You also need other layouts for header and content:
 
 ``` xml
 
